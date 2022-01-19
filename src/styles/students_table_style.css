@@ -1,0 +1,228 @@
+.search {
+    margin: 30px auto 0px 40px;
+}
+
+.button_add {
+    margin: 30px 54px 0px auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#alumno_search {
+    position: static;
+    width: 80px;
+    height: 20px;
+    left: 0px;
+    top: 10px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 24px;
+}
+
+#add_student {
+
+    position: absolute;
+    padding: 5px 14px 5px 10px;
+    text-align:right;
+
+    width: 168px;
+    height: 30px;
+    background: #FFFFFF;
+
+    border: 1px solid #E6E6EA;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+
+    font-feature-settings: 'pnum' on, 'lnum' on;
+
+    color: #121625;
+
+    background-image: url(../images/add.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    padding-left: 30px;
+}
+
+#add_student:focus{
+    outline: 2px solid #32D5A4;
+    box-shadow: 0 0 10px #32D5A4;
+}
+
+#input_search {
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 15px;
+    position: relative;
+    width: 343px;
+    height: 30px;
+    background: #E6E6EA;
+    border-radius: 8px;
+    border: none;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 0px;
+    background-image: url(../images/search.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    padding-left: 30px;
+}
+
+#input_search:focus{
+    outline: 2px solid #32D5A4;
+    box-shadow: 0 0 10px #32D5A4;
+}
+
+.table {
+    background: #FFFFFF;
+    border: 1px solid #E6E6EA;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 90vw;
+}
+
+td {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    align-items: center;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+}
+
+.etiqueta-table-page {
+    background: #32D5A4;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
+    margin: 2px;
+}
+
+th {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 13px;
+    align-items: center;
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #A5A8B3;
+}
+
+.orden_alfabetica {
+    color: #A5A8B3;
+    height: 15px;
+}
+
+.text-header {
+    cursor: pointer;
+}
+
+#p_header_dashboard{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.row_header{
+    padding: 10px 20px 5px 20px;
+    margin: 0px;
+    background-color: #F8F8F9;
+}
+
+#btn-settings{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px;
+    padding: 0px 10px 0px 0px;
+    position: static;
+    width: 167px;
+    height: 40px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    border-radius: 91px;    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+
+#btn-settings p{
+    position: static;
+    width: 72px;
+    height: 22px;
+    left: 55px;
+    top: 9px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 15px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 160%;
+    letter-spacing: 0.005em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+}
+
+#btn-settings img {
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px -10px;
+    width: 20px;
+    cursor: pointer
+}
+
+#circle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    width: 40px;
+    height: 40px;
+    left: 0px;
+    top: 0px;
+    background: #121625;
+    border-radius: 59px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;
+    color: #E6E6EA;
+}

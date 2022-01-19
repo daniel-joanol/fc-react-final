@@ -1,0 +1,204 @@
+html, body {
+    margin: 0px;
+    font-family: 'Raleway', sans-serif;
+    background-color:#F8F8F9;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&display=swap');
+
+.container {
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0px;
+    margin: 0px;
+    flex-direction: row;
+}
+
+.left {
+    padding-left: 80px;
+    background-color: #FFF;
+    display: flex;
+    position: absolute;
+    width: 33vw;
+    min-width: 450px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+}
+
+#main_form-login-page{
+    margin: auto;
+    width: min-content;
+}
+
+.right {
+    background-image: url(../images/background_picture.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 67 vw;
+    padding: 0px;
+    margin: 0px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    outline: 2px solid #32D5A4;
+    box-shadow: 0 0 10px #32D5A4;
+}
+
+@media only screen and (max-width: 576px) {
+    form {
+      position: relative;
+    }
+
+    .right {
+        display: none;
+    }
+
+    .left {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.font_green{
+    color: #32D5A4;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.box-login-page {
+    background: #F8F8F9;
+    height: 40px;
+    width: 400px;
+    left: 0px;
+    top: 28px;
+    border-radius: 8px;
+    padding: 12px, 15px, 12px, 15px;
+    padding-left: 10px;
+}
+
+.button {
+    background-color: #32D5A4;
+    color: #FFF;
+    height: 30px;
+    width: 400px;
+    left: 0px;
+    top: 28px;
+    border-radius: 8px;
+    margin-top: 12px;
+    padding: 12px, 15px, 12px, 15px;
+}
+
+.nombre_campo {
+    position: static;
+    width: 450px;
+    height: 16px;
+    left: 0px;
+    top: 0px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 12px 0px;
+}
+
+.recuerdame {  
+    position: static;
+    width: 195px;
+    height: 16px;
+    left: 32px;
+    top: 4px;
+    margin-top: 12px;
+}
+
+.recuerdame label{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+    margin-left: 12px;
+}
+
+.olvidado p{
+    position: static;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    text-align: right;
+    margin-top: 16px;
+    height: 16px;
+}
+
+.container2 {
+    height: 40px;
+    width: 400px;
+}
+
+.texto_pie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    margin-left: 0px;
+    margin-top: 100px;
+    position: absolute;
+    width: 450px;
+    height: 60px;
+    left: 80px;
+    bottom: 30px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.texto_pie p {
+    position: static;
+    width: 286px;
+    height: 20px;
+    left: 0px;
+    top: 0px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #A5A8B3; 
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    padding-left: 0px;
+    margin: 0px 0px;
+}
+
+input {
+    border: none;
+}
+
+.errorMessage {
+    margin: 30px;
+    color: tomato;
+}
