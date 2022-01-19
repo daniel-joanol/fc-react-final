@@ -27,7 +27,7 @@ const Forgotpass = () => {
                 console.log(response)
                 console.log('Check your email account')
                 alert('Check your email account')
-                setTimeout(navigate('/login'), 6000)
+                setTimeout(navigate('/login'), 3000)
             })
             .catch((error) => {
                 console.log(error)
@@ -36,6 +36,7 @@ const Forgotpass = () => {
     }
 
     return (
+        <div class='d-flex justify-content-center' style={{minWidth: '50%', paddingTop: '50px'}}>
             <Formik
                 initialValues = { initialCredentials }
                 validationSchema = { loginSchema }
@@ -49,31 +50,36 @@ const Forgotpass = () => {
                     errors,
                     handleChange,
                     handleBlur }) => (
-                        <div id='forgot_pass-form'>
+                        <div class='d-flex flex-column' class='pass-form'>
                             <Form>
                                 <div>
-                                    <h1>Forgot your password?</h1>
+                                    <h2>Forgot your password?</h2>
                                 </div>
-
+                                
                                 <div>
                                     <label htmlFor='email' className='nombre_campo'>Email</label>
-                                    <Field id='email' className='box-login-page' type='email' name='email' placeholder='Introduce tu correo' />
-
-                                {
-                                    errors.email && touched.email &&
-                                    (
-                                        <ErrorMessage name='email' component='div'/>
-                                    )
-                                }
                                 </div>
 
+                                <div>    
+                                    <Field id='email' className='box-login-page' type='email' name='email' placeholder='Introduce tu correo' />
+                                        {
+                                            errors.email && touched.email &&
+                                            (
+                                                <ErrorMessage name='email' component='div'/>
+                                            )
+                                        }
+                                </div>
+                                        
                                 <div>
                                     <p></p>
-                                    <input className="button" type="submit" value="Enviar" />
-                                </div>
+                                        <input className="button" type="submit" value="Solicitar nueva contraseña" />
+                                    </div>
                             </Form>
                         </div>
-            )} </Formik>
+            )} 
+        
+        </Formik>
+    </div>
     );
 }
 

@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard_page';
 import LoginPage from './pages/login_page'
 import StudentDetailsPage from './pages/student_details_page';
 import ForgotPassPage from './pages/forgot_pass_page';
+import NewPassPage from './pages/new_pass_page';
 
 export const AuthContext = React.createContext();
 
@@ -46,11 +47,12 @@ function AppRouting() {
         <AuthContext.Provider value={{ state, dispatch}}>
             <Router>
                 <Routes>
-                    <Route path='*' element={<Navigate replace to='/login' />} />
+                    <Route path='' element={<Navigate replace to='/login' />} />
                     <Route path='/login' element={ <LoginPage /> }/>
                     <Route path='/dashboard' element={ <Dashboard /> } />
                     <Route path='/detalles' element={ <StudentDetailsPage />} />
                     <Route path='/forgot' element={ <ForgotPassPage />} />
+                    <Route path='/new-pass' element={ <NewPassPage />} />
                 </Routes>
             </Router>
         </AuthContext.Provider>

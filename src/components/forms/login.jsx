@@ -30,11 +30,12 @@ const Login = () => {
     }
 
     const [initialEmail, setInitialEmail] = useState('');
+    const [initialPassword, setInitialPassword] = useState('');
 
     useEffect(() => {
         document.body.style.backgroundColor='#FFF';
         document.getElementById('email').value = initialEmail;
-        document.getElementById('password').value = '';
+        document.getElementById('password').value = initialPassword;
         document.getElementById("check").defaultChecked = false;
         if (authState.isAuthenticated) {
             navigateTo('/dashboard');
@@ -61,7 +62,7 @@ const Login = () => {
                     type: "LOGIN",
                     payload: response
                 });
-                console.log('Login realized with success!')
+                console.log('Login realized with success!');
             })
             .catch((error) => {
                 setData({
@@ -79,8 +80,11 @@ const Login = () => {
                 onSubmit={async (values) => {
                     if (values.check == true){
                         setInitialEmail(values.email)
+                        setInitialPassword(values.password)
                     } else {
                         setInitialEmail('')
+                        setInitialPassword('')
+
                     }
                     authUser(values)
                 }}
