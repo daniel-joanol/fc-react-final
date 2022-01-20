@@ -77,10 +77,10 @@ const StudentDetails = () => {
                                     <div className="col">
                                         <p className="formulario_campo">Documento CV</p>
                                         <label for="file-upload" className="custom_file_upload">
-                                            <spam className="boton--texto boton--subir">Subir Archivo</spam>
+                                            <span className="boton--texto boton--subir">Subir Archivo</span>
                                         </label>
                                         <input id="file-upload" type="file" accept=".pdf"/>
-                                        <button type="button" id="custom-borrar" onclick="removeFile()"><spam class="boton--texto boton--borrar">Borrar</spam></button>
+                                        <button type="button" id="custom-borrar" onclick="removeFile()"><span class="boton--texto boton--borrar">Borrar</span></button>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -101,14 +101,14 @@ const StudentDetails = () => {
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                        <spam className="etiqueta" >Angular<spam class="close" onclick="deleteTag('Angular')"></spam></spam> 
-                                        <spam className="etiqueta" >CSS - HTML<spam class="close" onclick="deleteTag('CSS - HTML')"></spam></spam>  
-                                        <spam className="etiqueta" style={ {display: 'none'} }>Java<spam class="close" onclick="deleteTag('Java')"></spam></spam> 
-                                        <spam className="etiqueta" style={ {display: 'none'} }>JavaScript<spam class="close" onclick="deleteTag('JavaScript')"></spam></spam> 
-                                        <spam className="etiqueta" style={ {display: 'none'} }>Python<spam class="close" onclick="deleteTag('Python')"></spam></spam> 
-                                        <spam className="etiqueta" style={ {display: 'none'} }>React<spam class="close" onclick="deleteTag('React')"></spam></spam> 
-                                        <spam className="etiqueta" style={ {display: 'none'} }>Spring<spam class="close" onclick="deleteTag('Spring')"></spam></spam> 
-                                        <spam className="etiqueta" style={ {display: 'none'} }>TypeScript<spam class="close" onclick="deleteTag('TypeScript')"></spam></spam> 
+                                        <span className="etiqueta" >Angular<span class="close" onclick="deleteTag('Angular')"></span></span> 
+                                        <span className="etiqueta" >CSS - HTML<span class="close" onclick="deleteTag('CSS - HTML')"></span></span>  
+                                        <span className="etiqueta" style={ {display: 'none'} }>Java<span class="close" onclick="deleteTag('Java')"></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>JavaScript<span class="close" onclick="deleteTag('JavaScript')"></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>Python<span class="close" onclick="deleteTag('Python')"></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>React<span class="close" onclick="deleteTag('React')"></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>Spring<span class="close" onclick="deleteTag('Spring')"></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>TypeScript<span class="close" onclick="deleteTag('TypeScript')"></span></span> 
                                     </div>
                                 </div>
                             </div>

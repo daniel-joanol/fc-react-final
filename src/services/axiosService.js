@@ -29,6 +29,15 @@ export const newPass = (email, password) => {
     return axios.post('http://localhost:8080/api/auth/new-pass', body)
 }
 
+export const getNameUser = (token) => {
+
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+    
+    return axios.get('http://localhost:8080/api/user/name', { headers: headers})
+}
+
 export const getAll = (token) => {
 
     const headers = {

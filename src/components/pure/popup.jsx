@@ -84,7 +84,7 @@ const Popup = props => {
                                 <div className='row'>
                                     <div className='col-4'>
                                         <label for="file-upload1" className="custom_file_upload">
-                                            <spam className="boton--texto boton--subir">Subir Imagen</spam>
+                                            <span className="boton--texto boton--subir">Subir Imagen</span>
                                         </label>
                                         <input id="file-upload1" type="file" accept="image/png, image/jpeg, image/jpg"/>
                                     </div>
@@ -103,7 +103,7 @@ const Popup = props => {
                                 <div className='row'>
                                     <div className='col-5'>
                                         <label for="file-upload2" className="custom_file_upload custom_file_upload2">
-                                            <spam className="boton--texto boton--subir">Subir Documento PDF</spam>
+                                            <span className="boton--texto boton--subir">Subir Documento PDF</span>
                                         </label>
                                         <input id="file-upload2" type="file" accept=".pdf"/>
                                     </div>

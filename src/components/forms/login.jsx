@@ -25,20 +25,17 @@ const Login = () => {
     const { state: authState } = React.useContext(AuthContext);
     const navigate = useNavigate();
 
-    const navigateTo = (path) => {
-        navigate(path);
-    }
-
     const [initialEmail, setInitialEmail] = useState('');
     const [initialPassword, setInitialPassword] = useState('');
+    const [initialCheck, setInitialCheck] = useState(false);
 
     useEffect(() => {
         document.body.style.backgroundColor='#FFF';
         document.getElementById('email').value = initialEmail;
         document.getElementById('password').value = initialPassword;
-        document.getElementById("check").defaultChecked = false;
+        document.getElementById("check").defaultChecked = initialCheck;
         if (authState.isAuthenticated) {
-            navigateTo('/dashboard');
+            navigate('/dashboard');
         }
     }, )
 
@@ -81,9 +78,11 @@ const Login = () => {
                     if (values.check == true){
                         setInitialEmail(values.email)
                         setInitialPassword(values.password)
+                        setInitialCheck(true)
                     } else {
                         setInitialEmail('')
                         setInitialPassword('')
+                        setInitialCheck(false)
 
                     }
                     authUser(values)
@@ -98,7 +97,7 @@ const Login = () => {
                     <div id='main_form-login-page'>
                     <Form>
                         <div>
-                            <p>OpenBootcamp<spam className="font_green bold"> | Alumnos</spam></p>
+                            <p>OpenBootcamp<span className="font_green bold"> | Alumnos</span></p>
                         </div>
                         
                         <div>
@@ -129,14 +128,14 @@ const Login = () => {
                             <p></p>
                             <input className="button" type="submit" value="Enviar" />
                             {
-                                data.errorMessage && <p class='errorMessage'>{data.errorMessage}</p>
+                                data.errorMessage && <p className='errorMessage'>{data.errorMessage}</p>
                             }
                         </div>
                         
                         <div className="container2">
                             <div className="row">
                                 <div className="col recuerdame">
-                                    <Field type="checkbox" name='check' id='check' /><label for="check">Recuerdame</label>
+                                    <Field type="checkbox" name='check' id='check' /><label htmlFor="check">Recuerdame</label>
                                 </div>
                                 <div className="col olvidado"> 
                                     <p className="font_green"><Link to={'/forgot'}>He olvidado la contraseña</Link></p>
