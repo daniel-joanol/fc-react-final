@@ -1,33 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Student } from '../../models/student.class';
 import StudentComponent from './student_component';
-import { AuthContext } from '../../AppRouting';
-import { getAll} from '../../services/axiosService';
 
-const StudentsTable = () => {
+const StudentsTable = ({ candidates }) => {
 
-  const { dispatch } = React.useContext(AuthContext);
-  const { state: authState } = React.useContext(AuthContext);
+  const sortTable = (n) => {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
 
-  const [candidates, setCandidates] = useState([]);
+        dir = "asc";
+        
+        while (switching) {
+          
+          switching = false;
+          rows = table.rows;
+          
+          for (i = 1; i < (rows.length - 1); i++) {
+            
+            shouldSwitch = false;
+            
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            
+            if (dir == "asc") {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                
+                shouldSwitch = true;
+                break;
+              }
+            } else if (dir == "desc") {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
 
-  const getAllCandidates = () => {
-    getAll(authState.token)
-      .then((response) => {
-        console.log(response)
-        setCandidates(response.data)
-      })
-      .catch((error) => {
-        console.log(`Error: ${error}`)
-      })
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+          if (shouldSwitch) {
+            
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+
+            switchcount ++;
+          } else {
+            
+            if (switchcount == 0 && dir == "asc") {
+              dir = "desc";
+              switching = true;
+            }
+          }
+        }
   }
-
-  useEffect(() => {
-    getAllCandidates()
-  }, []);
-
-  const sortTable = ({n}) => {}
 
     
 
@@ -36,12 +61,12 @@ const StudentsTable = () => {
     <table className="table table-hover" id="myTable">
       <thead>
       <tr>
-        <th scope="col" onclick={() => sortTable(0)}><span className="text-header">NOMBRE  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
-        <th scope="col" onclick={() => sortTable(1)}><span className="text-header">CIUDAD  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
-        <th scope="col" onclick={() => sortTable(2)}><span className="text-header">PAÍS  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+        <th scope="col" onClick={() => sortTable(0)}><span className="text-header">NOMBRE  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+        <th scope="col" onClick={() => sortTable(1)}><span className="text-header">CIUDAD  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+        <th scope="col" onClick={() => sortTable(2)}><span className="text-header">PAÍS  <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
         <th scope="col">TELÉFONO</th>
-        <th scope="col" onclick={() => sortTable(4)}><span className="text-header">CORREO ELETRÓNICO <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
-        <th scope="col" onclick={() => sortTable(5)}><span className="text-header">ETIQUETAS <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+        <th scope="col" onClick={() => sortTable(4)}><span className="text-header">CORREO ELETRÓNICO <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+        <th scope="col" onClick={() => sortTable(5)}><span className="text-header">ETIQUETAS <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
       </tr>
         </thead>
           <tbody>
@@ -63,4 +88,10 @@ const StudentsTable = () => {
     );
 }
 
+StudentsTable.propTypes = {
+  candidates: PropTypes.array.isRequired
+};
+
+
 export default StudentsTable;
+

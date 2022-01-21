@@ -9,8 +9,10 @@ export class Student {
     remote = true;
     local = true;
     transfer = false;
+    photo = '';
+    curriculum = '';
 
-    constructor(fullname, city, country, phone, email, tags, remote, local, transfer){
+    constructor(fullname, city, country, phone, email, tags, remote, local, transfer, photo, curriculum){
         this.fullname = fullname;
         this.city = city;
         this.country = country;
@@ -20,6 +22,7 @@ export class Student {
         this.remote = remote;
         this.local = local;
         this.transfer = transfer;
-    
+        this.photo = photo;
+        this.curriculum = curriculum;
     }
 }

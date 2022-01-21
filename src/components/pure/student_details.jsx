@@ -101,8 +101,6 @@ const StudentDetails = ({state, token}) => {
             city2 = city;
         }
 
-
-
         if (id === 'traslado'){
             if (e.target.value === 'Sí'){
                 setTransfer(true);
