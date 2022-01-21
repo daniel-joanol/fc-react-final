@@ -44,7 +44,7 @@ export const getAll = (token) => {
         'Authorization': `Bearer ${token}`
     }
 
-    return axios.get('http://localhost:8080/api/candidates', { headers: headers })
+    return axios.get('http://localhost:8080/api/candidates/', { headers: headers })
 }
 
 export const getCandidateById = (id, token) => {
@@ -110,17 +110,17 @@ export const updateCandidate = (student, id, token) => {
 
     const body = {
         fullname: student.fullname,
+        email: student.email,
         city: student.city,
         country: student.country,
-        phone: student.phoneNumber,
-        email: student.email,
+        phone: student.phone,
         tags: student.tags,
         remote: student.remote,
         local: student.local,
         transfer: student.transfer
     }
 
-    return axios.patch('http://localhost:8080/api/candidates/' + id, body, { headers: headers })
+    return axios.put('http://localhost:8080/api/candidates/' + id, body, { headers: headers })
 }
 
 export const deleteCandidate = (id, token) => {
