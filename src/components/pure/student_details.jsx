@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Student } from '../../models/student.class.js'
 import { getCandidateById, updateCandidate } from '../../services/axiosService.js'
 
-const StudentDetails = ({id, token}) => {
+const StudentDetails = ({state, token}) => {
 
     const [fullname, setFullname] = useState(null);
     const [phone, setPhone] = useState(null);
@@ -25,7 +25,6 @@ const StudentDetails = ({id, token}) => {
     var local2;
     var transfer2;
     var city2;
-    var tags2;
 
     useEffect(() => {
       getCandidate()
@@ -33,7 +32,7 @@ const StudentDetails = ({id, token}) => {
     }, [getCandidate]);
 
     const getCandidate = useCallback(() => {
-        getCandidateById(id, token)
+        getCandidateById(state, token)
             .then((response) =>{
 
                 setFullname(response.data.fullname)
@@ -60,7 +59,7 @@ const StudentDetails = ({id, token}) => {
             .catch((error) => {
                 console.log(`Error: ${error}`)
             })
-    }, [id, token])
+    }, [state, token])
 
     const changeCities = () => {
         let filter, pais, ciudad, ciudadActual, nCiudades, i;
@@ -102,6 +101,8 @@ const StudentDetails = ({id, token}) => {
             city2 = city;
         }
 
+
+
         if (id === 'traslado'){
             if (e.target.value === 'Sí'){
                 setTransfer(true);
@@ -142,9 +143,8 @@ const StudentDetails = ({id, token}) => {
             remote2 = remote;
             local2 = local;
         }
-
-        updateOnDb();
         
+        updateOnDb()
     }
 
     const updateOnDb = () => {
@@ -153,8 +153,9 @@ const StudentDetails = ({id, token}) => {
         tags.map((tag) => { objTags.push({name: tag})})
 
         const updatedStudent = new Student(fullname, city2, country, phone, email, objTags, remote2, local2, transfer2)
+        console.log(updatedStudent)
 
-        updateCandidate(updatedStudent, id, token)
+        updateCandidate(updatedStudent, state, token)
             .then((response) => {
                 console.log(response)
             })
@@ -191,19 +192,23 @@ const StudentDetails = ({id, token}) => {
             if ( filter == nombreEtiqueta) {
                 etiquetas.item(i).style.display = "";
                 etiquetaActual.value = "";
+                setTags(tags => [...tags, filter])
             }
         }
 
     }
 
     const deleteTag = (tag) => {
-        var etiquetas, i, nombreEtiqueta;
+        var etiquetas, i, nombreEtiqueta, newTags, index;
+        newTags = tags
         etiquetas = document.getElementsByClassName("etiqueta");
 
         for (i = 0; i < etiquetas.length; i++){
             nombreEtiqueta = etiquetas.item(i).innerHTML.split("<")[0];
             if ( tag == nombreEtiqueta) {
                 etiquetas.item(i).style.display = "none";
+                index = newTags.findIndex((x) => x === tag);
+                newTags.splice(index, 1);
             }
         }
     }
@@ -311,7 +316,7 @@ const StudentDetails = ({id, token}) => {
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                        <span className="etiqueta" style={ {display: 'none'} }>Angular<span class="close" onClick= {() => deleteTag('Angular')}></span></span> 
+                                        <span className="etiqueta" style={ {display: 'none'} }>Angular<span class="close" onClick= { () => deleteTag('Angular') }></span></span> 
                                         <span className="etiqueta" style={ {display: 'none'} }>CSS - HTML<span class="close" onClick={() => deleteTag('CSS - HTML')}></span></span>  
                                         <span className="etiqueta" style={ {display: 'none'} }>Java<span class="close" onClick={() => deleteTag('Java')}></span></span> 
                                         <span className="etiqueta" style={ {display: 'none'} }>JavaScript<span class="close" onClick={() => deleteTag('JavaScript')}></span></span> 
@@ -338,6 +343,6 @@ export default StudentDetails;
 
 
 StudentDetails.propTypes = {
-    id: PropTypes.number.isRequired,
+    state: PropTypes.number.isRequired,
     token: PropTypes.string.isRequired
 };

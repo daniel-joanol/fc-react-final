@@ -16,7 +16,7 @@ const StudentDetailsPage = () => {
             <HeaderDetails />
             <body>
                 <div className="container">
-                        <StudentDetails id={state.id} token={authState.token}/>
+                        <StudentDetails state={state.id} token={authState.token}/>
                 </div>
             </body>
         </div>
