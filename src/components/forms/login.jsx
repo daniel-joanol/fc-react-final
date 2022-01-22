@@ -26,13 +26,12 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [initialEmail, setInitialEmail] = useState('');
-    const [initialPassword, setInitialPassword] = useState('');
-    const [initialCheck, setInitialCheck] = useState(false);
+    const [initialCheck, setInitialCheck] = useState(localStorage.getItem('rememberMe'));
 
     useEffect(() => {
         document.body.style.backgroundColor='#FFF';
         document.getElementById('email').value = initialEmail;
-        document.getElementById('password').value = initialPassword;
+        document.getElementById('password').value = '';
         document.getElementById("check").defaultChecked = initialCheck;
         if (authState.isAuthenticated) {
             navigate('/dashboard');
@@ -76,14 +75,10 @@ const Login = () => {
                 validationSchema = { loginSchema }
                 onSubmit={async (values) => {
                     if (values.check == true){
-                        setInitialEmail(values.email)
-                        setInitialPassword(values.password)
-                        setInitialCheck(true)
+                        localStorage.setItem("rememberMe", true)
+                        localStorage.setItem("username", values.email)
                     } else {
-                        setInitialEmail('')
-                        setInitialPassword('')
-                        setInitialCheck(false)
-
+                        localStorage.setItem("rememberMe", false)
                     }
                     authUser(values)
                 }}

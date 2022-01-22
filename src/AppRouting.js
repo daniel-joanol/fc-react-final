@@ -27,13 +27,15 @@ const reducer = (state, action) => {
           token: action.payload.data.token
         };
       case "LOGOUT":
-        localStorage.clear();
-        return {
-          ...state,
-          isAuthenticated: false,
-          username: null,
-          token: null
-        };
+          localStorage.clear()
+
+          return {
+            ...state,
+            isAuthenticated: false,
+            username: null,
+            token: null
+          };
+
       default:
         return state;
     }

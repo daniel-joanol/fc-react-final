@@ -8,19 +8,18 @@ const StudentComponent = ({student}) => {
 
     const navigate = useNavigate();
 
-    const navigateTo = (path) => {
-        navigate(path);
+    const goToDetails = (e) => {
+        e.preventDefault();
+        navigate('/detalles', { state : student});
     }
-
-    
 
     return (
 
-        <tr onClick={() => navigateTo('/detalles')} style={{ cursor: 'pointer'}}>
-            <td>{student.name}</td>
+        <tr onClick={ goToDetails } style={{ cursor: 'pointer'}}>
+            <td>{student.fullname}</td>
             <td>{student.city}</td>
             <td>{student.country}</td>
-            <td>{student.phoneNumber}</td>
+            <td>{student.phone}</td>
             <td>{student.email}</td>
             <td>{student.tags.map((tag) => {
             return (

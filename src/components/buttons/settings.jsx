@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { AuthContext } from '../../AppRouting'
-import { getNameUser } from '../../services/axiosService'
+import { AuthContext } from '../../AppRouting';
+import { getNameUser } from '../../services/axiosService';
 import { useNavigate} from 'react-router-dom';
 
 
@@ -17,7 +17,7 @@ const SettingsBtn = () => {
     }, [])
 
     const logout = () => {
-        dispatch({ type: "LOGOUT", })
+        dispatch({ type: "LOGOUT" })
         navigate('/login')
     } 
 
@@ -35,10 +35,10 @@ const SettingsBtn = () => {
     }
 
     return (
-        <div id='btn-settings'>
+        <div id='btn-settings' onClick={ () => logout() }>
             <div id='circle'>{ name.charAt(0) + name.charAt(1) }</div>
             <p>{ name }</p>
-            <img src={require('../../images/expand.png')} onClick={ () => logout() }></img>
+            <img src={require('../../images/expand.png')} ></img>
         </div>
     );
 }

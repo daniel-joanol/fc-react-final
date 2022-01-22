@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Student } from '../../models/student.class';
 import StudentComponent from './student_component';
+import { AuthContext } from '../../AppRouting';
+import { getAll} from '../../services/axiosService';
 
 const StudentsTable = () => {
 
-  const student1 = new Student('Mark Otto', 'Avila', 'España', '+34 999345122', 'mark@yahoo.com', ['Java', 'Spring']);
-  const student2 = new Student('Juan Bermudez', 'Barcelona', 'España', '+34 992345122', 'juan@gmail.com', ['CSS-HTML', 'React']);
-  const student3 = new Student('Maria Gomez', 'Floripa', 'Brasil', '+55 921934512', 'maria@hotmail.com', ['Java', 'Python']);
-  const student5 = new Student('Ricardo Silva', 'Rio de Janeiro', 'Brasil', '+55 879345122', 'ricardo@hotmail.com', ['React', 'Spring', 'JavaScript', 'Java']);
-  const student4 = new Student('Raquel Tejeda', 'Madrid', 'España', '+34 979345122', 'raquel@yahoo.com', ['Java', 'Spring']);
+  const { dispatch } = React.useContext(AuthContext);
+  const { state: authState } = React.useContext(AuthContext);
 
-  const [students, setStudents] = useState([student1, student2, student3, student4, student5]);
+  const [candidates, setCandidates] = useState([]);
+
+  const getAllCandidates = () => {
+    getAll(authState.token)
+      .then((response) => {
+        console.log(response)
+        setCandidates(response.data)
+      })
+      .catch((error) => {
+        console.log(`Error: ${error}`)
+      })
+  }
+
+  useEffect(() => {
+    getAllCandidates()
+  }, []);
 
   const sortTable = ({n}) => {}
 
@@ -32,7 +46,7 @@ const StudentsTable = () => {
         </thead>
           <tbody>
            
-          { students.map((student, index) => {
+          { candidates.map((student, index) => {
                         return (
                                 <StudentComponent
                                     key={index} 
