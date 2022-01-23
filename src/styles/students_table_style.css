@@ -1,9 +1,9 @@
 .search {
-    margin: 30px auto 0px 40px;
+    margin: 0px auto 0px 0px;
 }
 
 .button_add {
-    margin: 30px 54px 0px auto;
+    margin: 0px 20px 0px auto;
     display: flex;
     justify-content: flex-end;
 }
@@ -65,7 +65,7 @@
 #input_search {
     flex-direction: row;
     align-items: center;
-    padding: 12px 15px;
+    /*padding: 12px 15px;*/
     position: relative;
     width: 343px;
     height: 30px;
@@ -92,8 +92,8 @@
     border: 1px solid #E6E6EA;
     box-sizing: border-box;
     border-radius: 20px;
-    margin: 10px auto;
-    width: 90vw;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 td {
@@ -151,6 +151,7 @@ th {
     font-weight: normal;
     font-size: 24px;
     line-height: 28px;
+    margin-bottom: 40px;
 }
 
 .row_header{
@@ -228,4 +229,45 @@ th {
     flex-grow: 0;
     margin: 0px 0px;
     color: #E6E6EA;
+}
+
+#filter-title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 30px
+}
+
+#filters-container{
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+#filters-container div{
+    margin-bottom: 20px
+}
+
+.input_check{
+    position: static;
+    height: 16px;
+    left: 0px;
+    top: 0px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #121625;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 10px;
 }

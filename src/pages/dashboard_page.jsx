@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import AddStudent from '../components/buttons/add_student';
-import SearchBox from '../components/pure/search_box';
 import StudentsTable from '../components/pure/students-table';
 import HeaderDashboard from '../components/pure/header_dashboard';
+import Filters from '../components/pure/filters';
 
 import { AuthContext } from '../AppRouting';
 import { getAll} from '../services/axiosService';
@@ -24,6 +23,7 @@ const [candidates, setCandidates] = useState([]);
         for (let i = 0; i < response.data.length; i++){
 
             const actualStudent = new Student(
+                response.data[i].id,
                 response.data[i].fullname,
                 response.data[i].city,
                 response.data[i].country,
@@ -39,6 +39,7 @@ const [candidates, setCandidates] = useState([]);
             
             candidatesList.push(actualStudent);
         }
+        
         setCandidates(candidatesList)
 
       })
@@ -55,12 +56,14 @@ const [candidates, setCandidates] = useState([]);
         <div>
             <HeaderDashboard />
             <body>
-            <div className='row'>
-                <div className='col-6'><SearchBox /></div>
-                <div className='col-6'><AddStudent /></div>
-            </div>
-            
-            <StudentsTable candidates={ candidates }/>
+              <div className='row'>
+              <div className='col-9'>            
+                <StudentsTable candidates={ candidates }/>
+              </div>  
+              <div className='col-3'>
+                  <Filters></Filters>
+              </div>
+              </div>
             </body>
         </div>
     );

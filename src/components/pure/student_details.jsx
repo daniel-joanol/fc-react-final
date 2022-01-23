@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Student } from '../../models/student.class.js'
 import { getCandidateById, updateCandidate } from '../../services/axiosService.js'
 
-const StudentDetails = ({state, token}) => {
+const StudentDetails = ({id, token}) => {
 
     const [fullname, setFullname] = useState(null);
     const [phone, setPhone] = useState(null);
@@ -32,7 +32,9 @@ const StudentDetails = ({state, token}) => {
     }, [getCandidate]);
 
     const getCandidate = useCallback(() => {
-        getCandidateById(state, token)
+
+        console.log(id)
+        getCandidateById(id, token)
             .then((response) =>{
 
                 setFullname(response.data.fullname)
@@ -59,7 +61,7 @@ const StudentDetails = ({state, token}) => {
             .catch((error) => {
                 console.log(`Error: ${error}`)
             })
-    }, [state, token])
+    }, [id, token])
 
     const changeCities = () => {
         let filter, pais, ciudad, ciudadActual, nCiudades, i;
@@ -150,10 +152,10 @@ const StudentDetails = ({state, token}) => {
         let objTags = []
         tags.map((tag) => { objTags.push({name: tag})})
 
-        const updatedStudent = new Student(fullname, city2, country, phone, email, objTags, remote2, local2, transfer2)
+        const updatedStudent = new Student(1, fullname, city2, country, phone, email, objTags, remote2, local2, transfer2)
         console.log(updatedStudent)
 
-        updateCandidate(updatedStudent, state, token)
+        updateCandidate(updatedStudent, id, token)
             .then((response) => {
                 console.log(response)
             })
@@ -341,6 +343,6 @@ export default StudentDetails;
 
 
 StudentDetails.propTypes = {
-    state: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     token: PropTypes.string.isRequired
 };

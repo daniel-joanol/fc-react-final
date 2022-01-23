@@ -66,7 +66,7 @@ export const createCandidate = (student, token) => {
         fullname: student.fullname,
         city: student.city,
         country: student.country,
-        phone: student.phoneNumber,
+        phone: student.phone,
         email: student.email,
         tags: student.tags,
         remote: student.remote,
@@ -74,20 +74,22 @@ export const createCandidate = (student, token) => {
         transfer: student.transfer
     }
 
-    return axios.post('http://localhost:8080/api/candidates', body, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/', body, { headers: headers })
 
 }
 
-export const addPhoto = (id, file, token) => {
+export const addPhoto = (file, token) => {
 
     const headers = {
+        'Content-Type' : 'multipart/form-data',
+        //;; charset=utf-8; boundary="----arbitrary boundary"`,
         'Authorization': `Bearer ${token}`
     }
 
     const formData = new FormData()
-    formData.append('multipartFile', file, file.name)
+        formData.append('multipartFile', file, file.name)
 
-    return axios.post('http://localhost:8080/api/candidates/photo/' + id, formData, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/photo', formData, { headers: headers })
 }
 
 export const addPdf = (id, file, token) => {
