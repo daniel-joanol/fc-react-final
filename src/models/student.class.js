@@ -12,7 +12,8 @@ export class Student {
     photo = '';
     curriculum = '';
 
-    constructor(fullname, city, country, phone, email, tags, remote, local, transfer, photo, curriculum){
+    constructor(id, fullname, city, country, phone, email, tags, remote, local, transfer, photo, curriculum){
+        this.id = id;
         this.fullname = fullname;
         this.city = city;
         this.country = country;
