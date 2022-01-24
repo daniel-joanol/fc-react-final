@@ -7,8 +7,8 @@ const Filters = ({getCandidatesFilter}) => {
     const [country, setCountry] = useState('null');
     const [city, setCity] = useState('null');
     const [transfer, setTransfer] = useState(null);
-    const [remote, setRemote] = useState(false);
-    const [local, setLocal] = useState(false);
+    const [remote, setRemote] = useState(null);
+    const [local, setLocal] = useState(null);
 
     useEffect(() => {
         search()
@@ -16,8 +16,6 @@ const Filters = ({getCandidatesFilter}) => {
     }, [country, city, transfer, remote, local, tags]);
 
     const search = () => {
-
-        console.log('got in search')
 
         let filter = '';
         if (country !== "null"){
@@ -32,15 +30,14 @@ const Filters = ({getCandidatesFilter}) => {
             filter = filter + 'transfer=' + transfer + '&';
         }
 
-        if (remote !== remote){
+        if (remote !== null){
             filter = filter + 'remote=' + remote + '&';
         }
 
-        if (local !== local){
+        if (local !== null){
             filter = filter + 'local=' + local + '&';
         }
-
-        console.log(tags)
+        
         if (tags.length !== 0){
             filter = filter + 'tags='
             tags.map((tag, index) => {
@@ -53,8 +50,6 @@ const Filters = ({getCandidatesFilter}) => {
                 
             })
         }
-
-        console.log('filter 1: ' + filter)
         
         getCandidatesFilter(filter);
     }
@@ -121,6 +116,7 @@ const Filters = ({getCandidatesFilter}) => {
         if (filter == "null".toUpperCase()){
             for (i = 0; i < 8; i++){
                 ciudadActual[i].style.display = "none";
+                setCity("null");
             }
         }
     
@@ -169,10 +165,33 @@ const Filters = ({getCandidatesFilter}) => {
         }
     }
 
+    const saveLocal = () => {
+        if (local === true){
+            setLocal(null)
+        } else {
+            setLocal(true)
+        }
+    }
+
+    const saveRemote = () => {
+        if (remote === true){
+            setRemote(null)
+        } else {
+            setRemote(true)
+        }
+    }
+
     return (
         <div id='filters-container'>
-            <h2 id='filter-title'>Filtros de búsqueda</h2>
-                <div>
+            <div className='row'>
+                <div className='col-10'>
+                    <h2 id='filter-title'>Filtros de búsqueda</h2>
+                </div>
+                <div className='col-2'>
+                    <img src={require('../../images/trash.png')} style={{width: "20px", cursor: "pointer"}} onClick={() => getCandidatesFilter('')}></img>
+                </div>
+            </div>
+                <div className='top-margin'>
                     <p className="formulario_campo">Etiquetas</p>
                     <input className="box" type="text" list="etiquetas-list" id="etiquetas_alumno" name="etiquetas_alumno" placeholder="Escribe para buscar..." onChange={ addSingleTag }/>
                     <datalist id="etiquetas-list">
@@ -187,7 +206,7 @@ const Filters = ({getCandidatesFilter}) => {
                     </datalist>
                 </div>
 
-                <div>
+                <div className='top-margin'>
                     <span className="etiqueta" style={ {display: 'none'} }>Angular<span class="close" onClick= { () => deleteTag('Angular') }></span></span> 
                     <span className="etiqueta" style={ {display: 'none'} }>CSS - HTML<span class="close" onClick={() => deleteTag('CSS - HTML')}></span></span>  
                     <span className="etiqueta" style={ {display: 'none'} }>Java<span class="close" onClick={() => deleteTag('Java')}></span></span> 
@@ -198,7 +217,7 @@ const Filters = ({getCandidatesFilter}) => {
                     <span className="etiqueta" style={ {display: 'none'} }>J-Unit<span class="close" onClick={() => deleteTag('J-Unit')}></span></span> 
                 </div>
 
-            <div>
+            <div className='top-margin'>
                 <p className="formulario_campo">País</p>
                 <select name="pais" id="pais" className="box" value={ country } onChange={ changeCities }>
                     <option value="null"> </option>
@@ -207,7 +226,7 @@ const Filters = ({getCandidatesFilter}) => {
                 </select>   
             </div>
 
-            <div>
+            <div className='top-margin'>
                 <p className="formulario_campo">Ciudad</p>
                     <select name="ciudad" id="ciudad" className="box" value={city} onChange={ (e) => setCity(e.target.value) }>
                         <option value="Ávila">Ávila</option>
@@ -222,16 +241,16 @@ const Filters = ({getCandidatesFilter}) => {
                     </select>
             </div>
 
-            <div>
+            <div className='top-margin'>
                 <p className='formulario_campo'>Presencial / a distancia</p>
 
-                    <input type="checkbox" id="presencial" name="presencial" />
-                    <label for="presencial" className='input_check' onChange={ () => setLocal(!local)} >Presencial</label><br/>
-                    <input type="checkbox" id="distancia" name="distancia" />
-                    <label for="distancia" className='input_check' onChange={ () => setRemote(!remote)}>A distancia</label>
+                    <input type="checkbox" id="presencial" name="presencial" onClick={ saveLocal }/>
+                    <label for="presencial" className='input_check'>Presencial</label><br/>
+                    <input type="checkbox" id="distancia" name="distancia" onClick={  saveRemote }/>
+                    <label for="distancia" className='input_check'>A distancia</label>
             </div>
 
-            <div>
+            <div className='top-margin'>
                 <p className='formulario_campo'>Posibilidad Traslado</p>
 
                     <input type="checkbox" id="traslado-si" name="traslado-si" onClick={ saveTransfer }/>

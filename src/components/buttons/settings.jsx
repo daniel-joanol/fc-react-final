@@ -24,7 +24,6 @@ const SettingsBtn = () => {
     const getName = () => {
         getNameUser(authState.token)
             .then((response) => {
-                console.log(response.data.message)
                 setName(response.data.message)
                 })
             .catch((error) => {
