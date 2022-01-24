@@ -16,8 +16,6 @@ const Filters = ({getCandidatesFilter}) => {
 
     const search = () => {
 
-        console.log('got in search')
-
         let filter = '';
         if (country){
             filter = filter + 'country=' + country + '&';
@@ -39,7 +37,6 @@ const Filters = ({getCandidatesFilter}) => {
             filter = filter + 'local=' + local + '&';
         }
 
-        console.log(tags)
         if (tags.length !== 0){
             filter = filter + 'tags='
             tags.map((tag, index) => {
@@ -70,7 +67,17 @@ const Filters = ({getCandidatesFilter}) => {
             if ( filter == nombreEtiqueta) {
                 etiquetas.item(i).style.display = "";
                 etiquetaActual.value = "";
-                setTags(tags => [...tags, filter])
+
+                //Avoids duplicated tags
+                if (tags.length > 0){
+                    tags.map((tag) => {
+                        if (tag !== filter){
+                            setTags(tags => [...tags, filter])
+                        }
+                    })
+                } else {
+                    setTags(tags => [...tags, filter])
+                }
             }
         }
 
