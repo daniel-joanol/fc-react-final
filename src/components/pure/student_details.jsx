@@ -209,6 +209,7 @@ const StudentDetails = ({id, token}) => {
                 etiquetas.item(i).style.display = "none";
                 index = newTags.findIndex((x) => x === tag);
                 newTags.splice(index, 1);
+                setTags([newTags]);
             }
         }
     }

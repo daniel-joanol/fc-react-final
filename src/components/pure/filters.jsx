@@ -12,7 +12,7 @@ const Filters = ({getCandidatesFilter}) => {
 
     useEffect(() => {
         search()
-    }, [country, city, transfer, remote, local]);
+    }, [country, city, transfer, remote, local, tags]);
 
     const search = () => {
 
@@ -39,12 +39,27 @@ const Filters = ({getCandidatesFilter}) => {
             filter = filter + 'local=' + local + '&';
         }
 
+        console.log(tags)
+        if (tags.length !== 0){
+            filter = filter + 'tags='
+            tags.map((tag, index) => {
+                
+                if (index === 0){
+                    filter = filter + tag
+                } else {
+                    filter = filter + ',' + tag
+                }
+                
+            })
+        }
+
         console.log('filter 1: ' + filter)
         
         getCandidatesFilter(filter);
     }
 
     const addSingleTag = () => {
+
         var etiquetas, filter, i, etiquetaActual, nombreEtiqueta;
         etiquetas = document.getElementsByClassName("etiqueta");
         etiquetaActual = document.getElementById("etiquetas_alumno");
@@ -72,8 +87,16 @@ const Filters = ({getCandidatesFilter}) => {
                 etiquetas.item(i).style.display = "none";
                 index = newTags.findIndex((x) => x === tag);
                 newTags.splice(index, 1);
+
+                if (newTags.length === 0 ){
+                    setTags([]);
+                } else {
+                    setTags([newTags]);
+                }
+                
             }
         }
+        
     }
 
     const saveTransfer = (e) => {
