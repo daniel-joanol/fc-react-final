@@ -147,6 +147,15 @@ const StudentDetails = ({id, token}) => {
         updateOnDb()
     }
 
+    const updateLocalValues2 = () => {
+        city2 = city;
+        remote2 = remote;
+        local2 = local;
+        transfer2 = transfer;
+
+        updateOnDb();
+    }
+
     const updateOnDb = () => {
 
         let objTags = []
@@ -196,6 +205,8 @@ const StudentDetails = ({id, token}) => {
             }
         }
 
+        updateLocalValues2();
+
     }
 
     const deleteTag = (tag) => {
@@ -209,9 +220,12 @@ const StudentDetails = ({id, token}) => {
                 etiquetas.item(i).style.display = "none";
                 index = newTags.findIndex((x) => x === tag);
                 newTags.splice(index, 1);
-                setTags([newTags]);
+                setTags(newTags);
             }
         }
+
+        updateLocalValues2();
+
     }
 
     const removeFile = () => {

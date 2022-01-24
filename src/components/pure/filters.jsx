@@ -70,7 +70,17 @@ const Filters = ({getCandidatesFilter}) => {
             if ( filter == nombreEtiqueta) {
                 etiquetas.item(i).style.display = "";
                 etiquetaActual.value = "";
-                setTags(tags => [...tags, filter])
+
+                if (tags.length === 0){
+                    setTags(tags => [...tags, filter])
+                } else {
+                    tags.map((tag) => {
+                        if (tag !== filter){
+                            setTags(tags => [...tags, filter])
+                        }
+                    })
+                }
+                
             }
         }
 
