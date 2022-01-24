@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 const Filters = ({getCandidatesFilter}) => {
 
     const [tags, setTags] = useState([]);
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('null');
+    const [city, setCity] = useState('null');
     const [transfer, setTransfer] = useState(null);
     const [remote, setRemote] = useState(false);
     const [local, setLocal] = useState(false);
 
     useEffect(() => {
         search()
+        changeCities()
     }, [country, city, transfer, remote, local, tags]);
 
     const search = () => {
@@ -19,11 +20,11 @@ const Filters = ({getCandidatesFilter}) => {
         console.log('got in search')
 
         let filter = '';
-        if (country){
+        if (country !== "null"){
             filter = filter + 'country=' + country + '&';
         }
 
-        if (city){
+        if (city !== 'null'){
             filter = filter + 'city=' + city + '&';
         }
 
@@ -109,6 +110,38 @@ const Filters = ({getCandidatesFilter}) => {
         
     }
 
+    const changeCities = () => {
+        let filter, pais, ciudad, ciudadActual, nCiudades, i;
+        pais = document.getElementById("pais");
+        ciudad = document.getElementById("ciudad");
+        ciudadActual = ciudad.getElementsByTagName("option");
+        filter = pais.value.toUpperCase();
+        nCiudades = 4;
+
+        if (filter == "null".toUpperCase()){
+            for (i = 0; i < 8; i++){
+                ciudadActual[i].style.display = "none";
+            }
+        }
+    
+        if (filter == "España".toUpperCase()){
+            for (i = 0; i < nCiudades; i++) {
+                ciudadActual[i].style.display = "";
+                ciudadActual[i+4].style.display = "none";
+            }
+        }
+
+        if (filter == "Brasil".toUpperCase()){
+            for (i = 0; i < nCiudades; i++) {
+                ciudadActual[i].style.display = "none";
+                ciudadActual[i+4].style.display = "";
+            }
+        }
+
+        setCountry(document.getElementById("pais").value)
+
+    }
+
     const saveTransfer = (e) => {
 
         if (e.target.name === 'traslado-si'){
@@ -167,12 +200,26 @@ const Filters = ({getCandidatesFilter}) => {
 
             <div>
                 <p className="formulario_campo">País</p>
-                <input className="box" type="text" id="country_alumno" name="country_alumno" placeholder="Escribe para buscar..." value={country} onChange={ (e) => setCountry(e.target.value) }/>   
+                <select name="pais" id="pais" className="box" value={ country } onChange={ changeCities }>
+                    <option value="null"> </option>
+                    <option value="España">España</option>
+                    <option value="Brasil">Brasil</option>
+                </select>   
             </div>
 
             <div>
                 <p className="formulario_campo">Ciudad</p>
-                <input className="box" type="text" id="city_alumno" name="city_alumno" placeholder="Escribe para buscar..." value={city} onChange={ (e) => setCity(e.target.value) }/>   
+                    <select name="ciudad" id="ciudad" className="box" value={city} onChange={ (e) => setCity(e.target.value) }>
+                        <option value="Ávila">Ávila</option>
+                        <option value="Barcelona">Barcelona</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Sevilla">Sevilla</option>
+                        <option value="Florianópolis">Florianópolis</option>
+                        <option value="Porto Alegre">Porto Alegre</option>
+                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                        <option value="São Paulo">São Paulo</option>
+                        <option value="null"> </option>
+                    </select>
             </div>
 
             <div>
