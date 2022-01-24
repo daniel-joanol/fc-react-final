@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-const Filters = () => {
+const Filters = ({getCandidatesFilter}) => {
 
     const [tags, setTags] = useState([]);
     const [country, setCountry] = useState('');
@@ -8,6 +9,40 @@ const Filters = () => {
     const [transfer, setTransfer] = useState(null);
     const [remote, setRemote] = useState(false);
     const [local, setLocal] = useState(false);
+
+    useEffect(() => {
+        search()
+    }, [country, city, transfer, remote, local]);
+
+    const search = () => {
+
+        console.log('got in search')
+
+        let filter = '';
+        if (country){
+            filter = filter + 'country=' + country + '&';
+        }
+
+        if (city){
+            filter = filter + 'city=' + city + '&';
+        }
+
+        if (transfer !== null){
+            filter = filter + 'transfer=' + transfer + '&';
+        }
+
+        if (remote !== remote){
+            filter = filter + 'remote=' + remote + '&';
+        }
+
+        if (local !== local){
+            filter = filter + 'local=' + local + '&';
+        }
+
+        console.log('filter 1: ' + filter)
+        
+        getCandidatesFilter(filter);
+    }
 
     const addSingleTag = () => {
         var etiquetas, filter, i, etiquetaActual, nombreEtiqueta;
@@ -128,5 +163,12 @@ const Filters = () => {
 
     );
 }
+
+
+
+Filters.propTypes = {
+    getCandidatesFilter: PropTypes.func.isRequired
+};
+
 
 export default Filters;

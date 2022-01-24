@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import StudentsTable from '../components/pure/students-table';
 import HeaderDashboard from '../components/pure/header_dashboard';
 import Filters from '../components/pure/filters';
 
 import { AuthContext } from '../AppRouting';
-import { getAll} from '../services/axiosService';
+import { getAll, getAllFiltered} from '../services/axiosService';
 import { Student} from '../models/student.class.js';
 
 const Dashboard = () => {
@@ -52,6 +53,38 @@ const [candidates, setCandidates] = useState([]);
     getAllCandidates()
   }, [getAllCandidates])
 
+  const getCandidatesFilter = (filter) => {
+
+      getAllFiltered(filter, authState.token)
+        .then((response) => {
+          const candidatesList2 = [];
+          for (let i = 0; i < response.data.length; i++){
+
+              const actualStudent2 = new Student(
+                  response.data[i].id,
+                  response.data[i].fullname,
+                  response.data[i].city,
+                  response.data[i].country,
+                  response.data[i].phone,
+                  response.data[i].email,
+                  response.data[i].tags,
+                  response.data[i].remote,
+                  response.data[i].local,
+                  response.data[i].transfer,
+                  response.data[i].photo,
+                  response.data[i].curriculum
+              )
+              
+              candidatesList2.push(actualStudent2);
+          }
+          
+          setCandidates(candidatesList2)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+  }
+
     return (
         <div>
             <HeaderDashboard />
@@ -61,12 +94,16 @@ const [candidates, setCandidates] = useState([]);
                 <StudentsTable candidates={ candidates }/>
               </div>  
               <div className='col-3'>
-                  <Filters></Filters>
+                  <Filters getCandidatesFilter={getCandidatesFilter}></Filters>
               </div>
               </div>
             </body>
         </div>
     );
 }
+
+Dashboard.propTypes = {
+  filter: PropTypes.string.isRequired
+};
 
 export default Dashboard;
