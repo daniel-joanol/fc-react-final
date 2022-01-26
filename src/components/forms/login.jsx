@@ -52,7 +52,7 @@ const Login = () => {
             ...data,
             errorMessage: null
         });
-        login(values.email, values.password)
+        login(values.email, values.password, values.check)
             .then((response) => {
                 dispatch({
                     type: "LOGIN",

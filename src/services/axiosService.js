@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export const login = (email, password) => {
+export const login = (email, password, remember) => {
     
     let body = {
         username: email,
-        password: password
+        password: password,
+        remember: remember
     }
 
     return axios.post('http://127.0.0.1:8080/api/auth/login/', body)
