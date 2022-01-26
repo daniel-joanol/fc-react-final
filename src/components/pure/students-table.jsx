@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import StudentComponent from './student_component';
 
 import AddStudent from '../../components/buttons/add_student';
+import { AuthContext } from '../../AppRouting';
+import { useLocation } from 'react-router-dom'
 
-const StudentsTable = ({ candidates }) => {
+const StudentsTable = ({ delCandidate, candidates }) => {
+
+  const { state: authState } = React.useContext(AuthContext);
+  const { state } = useLocation();
+
+  useEffect(() => {
+    
+  }, [delCandidate]);
 
   const sortTable = (n) => {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -80,6 +89,9 @@ const StudentsTable = ({ candidates }) => {
         }
   }  
 
+
+
+
     return (
         <div>
             <div className='row'>
@@ -99,6 +111,7 @@ const StudentsTable = ({ candidates }) => {
               <th scope="col">TELÉFONO</th>
               <th scope="col" onClick={() => sortTable(4)}><span className="text-header">CORREO ELETRÓNICO <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
               <th scope="col" onClick={() => sortTable(5)}><span className="text-header">ETIQUETAS <img src={require('../../images/orden_alfabetica.png')} className="orden_alfabetica" /></span></th>
+              <th></th>
             </tr>
               </thead>
                 <tbody>
@@ -106,6 +119,7 @@ const StudentsTable = ({ candidates }) => {
                 { candidates.map((student, index) => {
                               return (
                                       <StudentComponent
+                                          delCandidate={delCandidate}
                                           key={index} 
                                           student={student}
                                       >

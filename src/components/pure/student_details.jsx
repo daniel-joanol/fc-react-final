@@ -33,7 +33,7 @@ const StudentDetails = ({id, token}) => {
 
     const getCandidate = useCallback(() => {
 
-        console.log(id)
+
         getCandidateById(id, token)
             .then((response) =>{
 
@@ -147,9 +147,19 @@ const StudentDetails = ({id, token}) => {
         updateOnDb()
     }
 
+    const updateLocalValues2 = () => {
+        city2 = city;
+        remote2 = remote;
+        local2 = local;
+        transfer2 = transfer;
+
+        updateOnDb();
+    }
+
     const updateOnDb = () => {
 
         let objTags = []
+        console.log('tags: ' + tags)
         tags.map((tag) => { objTags.push({name: tag})})
 
         const updatedStudent = new Student(1, fullname, city2, country, phone, email, objTags, remote2, local2, transfer2)
@@ -158,22 +168,23 @@ const StudentDetails = ({id, token}) => {
         updateCandidate(updatedStudent, id, token)
             .then((response) => {
                 console.log(response)
+                getCandidate()
             })
             .catch((error) => {
                 console.log(error)
             })
+
     }
 
     const showTags = ( tagsActuales ) => {
 
-        var etiquetas, filter, i, nombreEtiqueta;
+        var etiquetas, i, nombreEtiqueta;
         etiquetas = document.getElementsByClassName("etiqueta");
 
         tagsActuales.map((tag) => {
-            filter = tag;
             for (i = 0; i < etiquetas.length; i++){
                 nombreEtiqueta = etiquetas.item(i).innerHTML.split("<")[0];
-                if ( filter == nombreEtiqueta) {
+                if ( tag == nombreEtiqueta) {
                     etiquetas.item(i).style.display = "";
                 }
             }
@@ -182,6 +193,9 @@ const StudentDetails = ({id, token}) => {
     }
 
     const addSingleTag = () => {
+
+        let newTags = tags;
+
         var etiquetas, filter, i, etiquetaActual, nombreEtiqueta;
         etiquetas = document.getElementsByClassName("etiqueta");
         etiquetaActual = document.getElementById("etiquetas_alumno");
@@ -192,9 +206,12 @@ const StudentDetails = ({id, token}) => {
             if ( filter == nombreEtiqueta) {
                 etiquetas.item(i).style.display = "";
                 etiquetaActual.value = "";
-                setTags(tags => [...tags, filter])
+                newTags.push(filter);
+                setTags(newTags);
             }
         }
+
+        updateLocalValues2();
 
     }
 
@@ -209,9 +226,12 @@ const StudentDetails = ({id, token}) => {
                 etiquetas.item(i).style.display = "none";
                 index = newTags.findIndex((x) => x === tag);
                 newTags.splice(index, 1);
-                setTags([newTags]);
+                setTags(newTags);
             }
         }
+
+        updateLocalValues2();
+
     }
 
     const removeFile = () => {

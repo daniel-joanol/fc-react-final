@@ -32,7 +32,7 @@ const Login = () => {
         document.body.style.backgroundColor='#FFF';
         document.getElementById('email').value = initialEmail;
         document.getElementById('password').value = '';
-        document.getElementById("check").defaultChecked = initialCheck;
+        document.getElementById("check").checked = initialCheck;
         if (authState.isAuthenticated) {
             navigate('/dashboard');
         }
@@ -52,11 +52,11 @@ const Login = () => {
             ...data,
             errorMessage: null
         });
-        login(values.email, values.password)
+        login(values.email, values.password, values.check)
             .then((response) => {
                 dispatch({
                     type: "LOGIN",
-                    payload: response
+                    payload: response,
                 });
                 console.log('Login realized with success!');
             })
@@ -76,7 +76,6 @@ const Login = () => {
                 onSubmit={async (values) => {
                     if (values.check == true){
                         localStorage.setItem("rememberMe", true)
-                        localStorage.setItem("username", values.email)
                     } else {
                         localStorage.setItem("rememberMe", false)
                     }

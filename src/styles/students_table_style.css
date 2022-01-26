@@ -248,7 +248,7 @@ th {
     border-radius: 20px;
 }
 
-#filters-container div{
+#filters-container .top-margin{
     margin-bottom: 20px
 }
 
@@ -270,4 +270,8 @@ th {
     align-self: stretch;
     flex-grow: 0;
     margin: 0px 10px;
+}
+
+.deleteCandidate{
+    width: 20px;
 }

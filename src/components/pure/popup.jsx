@@ -29,9 +29,10 @@ const Popup = ( props ) => {
         createCandidate(newCandidate, authState.token)
             .then((response) => {
                 console.log(response)
-                //let id = response.data.id
+                let id = response.data.id
             
-                uploadPhoto()
+                uploadPhoto(id)
+
                 /* let photoFile = document.querySelector('file-upload1')
                 console.log(photoFile)
 
@@ -47,7 +48,7 @@ const Popup = ( props ) => {
  
                 } */
 
-                //window.location.reload(false);
+                window.location.reload(false);
 
             })
             .catch((error) => {
@@ -164,17 +165,21 @@ const Popup = ( props ) => {
         }
     }
 
-    const uploadPhoto = async () => {
+    const uploadPhoto = async (id) => {
         const file = await readPhoto();
 
-        console.log(file)
-        console.log(file.name)
+        let formData = new FormData();
+        formData.append('MultipartFile', file, file.name);
 
-        await addPhoto(file, authState.token)
+        console.log(file)
+
+        console.log(formData);
+
+        await addPhoto(id, formData, authState.token)
         .then((response) => {
             console.log(response)
             console.log(response.data)
-            setCurriculum(response.data)
+            setPhoto(response.data)
         })
         .catch((error) => {
             console.log(error);
@@ -185,12 +190,12 @@ const Popup = ( props ) => {
         return new Promise(resolve => {
             var fileInput = document.querySelector('#file-upload1');
             var files = fileInput.files;
-            /* var i = 0;
+            var i = 0;
             while ( i < files.length) {
                 var file = files[i];
                 i++;
-            } */
-            resolve(files[0]);
+            }
+            resolve(file);
         });
     }
  
@@ -275,7 +280,7 @@ const Popup = ( props ) => {
                                 <div className='row'>
                                     <div className='col-4'>
                                         
-                                        <label for="file-upload1" className="custom_file_upload">
+                                        <label htmlFor="file-upload1" className="custom_file_upload">
                                             <span className="boton--texto boton--subir">Subir Imagen</span>
                                         </label>
                                         <input id="file-upload1" type="file" accept="image/png, image/jpeg, image/jpg"/>

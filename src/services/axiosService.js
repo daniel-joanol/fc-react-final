@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export const login = (email, password) => {
+export const login = (email, password, remember) => {
     
     let body = {
         username: email,
-        password: password
+        password: password,
+        remember: remember
     }
 
     return axios.post('http://127.0.0.1:8080/api/auth/login/', body)
@@ -86,21 +87,18 @@ export const createCandidate = (student, token) => {
 
 }
 
-export const addPhoto = (file, token) => {
+export const addPhoto = (id, formData, token) => {
 
     const headers = {
         'Content-Type' : 'multipart/form-data ;; charset=utf-8; boundary="----arbitrary boundary"',
         'Authorization': `Bearer ${token}`
     }
 
-    const formData = new FormData()
-        formData.append('photo', file)
-
     const body = {
-        formData
+        image:  formData
     }
 
-    return axios.post('http://localhost:8080/api/candidates/photo', body, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/photo/' + id, body, { headers: headers })
 }
 
 export const addPdf = (id, file, token) => {

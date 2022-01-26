@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 
 import StudentsTable from '../components/pure/students-table';
 import HeaderDashboard from '../components/pure/header_dashboard';
 import Filters from '../components/pure/filters';
 
 import { AuthContext } from '../AppRouting';
-import { getAll, getAllFiltered} from '../services/axiosService';
+import { deleteCandidate, getAll, getAllFiltered} from '../services/axiosService';
 import { Student} from '../models/student.class.js';
 
 const Dashboard = () => {
@@ -14,10 +13,13 @@ const Dashboard = () => {
 const { state: authState } = React.useContext(AuthContext);
 const [candidates, setCandidates] = useState([]);
 
+useEffect(() => {
+  getAllCandidates()
+}, [getAllCandidates, delCandidate])
+
   const getAllCandidates = useCallback(() => {
     getAll(authState.token)
       .then((response) => {
-        console.log(response)
 
         //Create the students objects
         const candidatesList = [];
@@ -48,10 +50,6 @@ const [candidates, setCandidates] = useState([]);
         console.log(`Error: ${error}`)
       })
   },[authState.token])
-
-  useEffect(() => {
-    getAllCandidates()
-  }, [getAllCandidates])
 
   const getCandidatesFilter = (filter) => {
 
@@ -85,13 +83,24 @@ const [candidates, setCandidates] = useState([]);
         })
   }
 
+  const delCandidate = (id) => {
+    deleteCandidate(id, authState.token)
+      .then((response) => {
+        console.log(response)
+        getAllCandidates()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
     return (
         <div>
             <HeaderDashboard />
             <body>
               <div className='row'>
               <div className='col-9'>            
-                <StudentsTable candidates={ candidates }/>
+                <StudentsTable delCandidate={delCandidate} candidates={ candidates }/>
               </div>  
               <div className='col-3'>
                   <Filters getCandidatesFilter={getCandidatesFilter}></Filters>
@@ -101,9 +110,5 @@ const [candidates, setCandidates] = useState([]);
         </div>
     );
 }
-
-Dashboard.propTypes = {
-  filter: PropTypes.string.isRequired
-};
 
 export default Dashboard;
