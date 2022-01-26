@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export const login = (email, password) => {
+export const login = (email, password, remember) => {
     
     let body = {
         username: email,
-        password: password
+        password: password,
+        remember: remember
     }
 
     return axios.post('http://127.0.0.1:8080/api/auth/login/', body)
@@ -29,13 +30,30 @@ export const newPass = (email, password) => {
     return axios.post('http://localhost:8080/api/auth/new-pass', body)
 }
 
+export const getNameUser = (token) => {
+
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+    
+    return axios.get('http://localhost:8080/api/user/name', { headers: headers})
+}
+
 export const getAll = (token) => {
 
     const headers = {
         'Authorization': `Bearer ${token}`
     }
 
-    return axios.get('http://localhost:8080/api/candidates', { headers: headers })
+    return axios.get('http://localhost:8080/api/candidates/', { headers: headers })
+}
+
+export const getAllFiltered = (filter, token) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    return axios.get('http://localhost:8080/api/candidates/filters?' + filter, { headers: headers })
 }
 
 export const getCandidateById = (id, token) => {
@@ -57,7 +75,7 @@ export const createCandidate = (student, token) => {
         fullname: student.fullname,
         city: student.city,
         country: student.country,
-        phone: student.phoneNumber,
+        phone: student.phone,
         email: student.email,
         tags: student.tags,
         remote: student.remote,
@@ -65,20 +83,22 @@ export const createCandidate = (student, token) => {
         transfer: student.transfer
     }
 
-    return axios.post('http://localhost:8080/api/candidates', body, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/', body, { headers: headers })
 
 }
 
-export const addPhoto = (id, file, token) => {
+export const addPhoto = (id, formData, token) => {
 
     const headers = {
+        'Content-Type' : 'multipart/form-data ;; charset=utf-8; boundary="----arbitrary boundary"',
         'Authorization': `Bearer ${token}`
     }
 
-    const formData = new FormData()
-    formData.append('multipartFile', file, file.name)
+    const body = {
+        image:  formData
+    }
 
-    return axios.post('http://localhost:8080/api/candidates/photo/' + id, formData, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/photo/' + id, body, { headers: headers })
 }
 
 export const addPdf = (id, file, token) => {
@@ -101,17 +121,17 @@ export const updateCandidate = (student, id, token) => {
 
     const body = {
         fullname: student.fullname,
+        email: student.email,
         city: student.city,
         country: student.country,
-        phone: student.phoneNumber,
-        email: student.email,
+        phone: student.phone,
         tags: student.tags,
         remote: student.remote,
         local: student.local,
         transfer: student.transfer
     }
 
-    return axios.patch('http://localhost:8080/api/candidates/' + id, body, { headers: headers })
+    return axios.put('http://localhost:8080/api/candidates/' + id, body, { headers: headers })
 }
 
 export const deleteCandidate = (id, token) => {

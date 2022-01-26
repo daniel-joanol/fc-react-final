@@ -7,14 +7,10 @@ const HeaderDetails = () => {
 
     const navigate = useNavigate();
 
-    const navigateTo = (path) => {
-        navigate(path);
-    } 
-
     return (
         <header>
             <div className='row row_header'>
-                <div id='p_header_details'className='col-6' onClick={() => navigateTo('/dashboard')}>
+                <div id='p_header_details'className='col-6' onClick={() => navigate('/dashboard')}>
                     <img src={require('../../images/go_back.png')}></img>
                     <p>Volver</p>
                 </div>

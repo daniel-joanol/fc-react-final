@@ -1,23 +1,29 @@
 export class Student {
-    name = '';
+    id = 0;
+    fullname = '';
     city = '';
     country = '';
-    phoneNumber = '';
+    phone = '';
     email = '';
     tags = [];
     remote = true;
     local = true;
     transfer = false;
+    photo = '';
+    curriculum = '';
 
-    constructor(name, city, country, phoneNumber, email, tags, remote, local, transfer){
-        this.name = name;
+    constructor(id, fullname, city, country, phone, email, tags, remote, local, transfer, photo, curriculum){
+        this.id = id;
+        this.fullname = fullname;
         this.city = city;
         this.country = country;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
         this.email = email;
         this.tags = tags;
         this.remote = remote;
         this.local = local;
         this.transfer = transfer;
+        this.photo = photo;
+        this.curriculum = curriculum;
     }
 }

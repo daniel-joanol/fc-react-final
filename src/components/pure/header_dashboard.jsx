@@ -7,7 +7,7 @@ const HeaderDashboard = () => {
         <header>
             <div className='row row_header'>
                 <div id='p_header_dashboard'className='col-6'>
-                    <p>OpenBootcamp<spam className="font_green bold"> | Alumnos</spam></p>
+                    <p>OpenBootcamp<span className="font_green bold"> | Alumnos</span></p>
                 </div>
                 <div className='col-6 d-flex flex-row-reverse'>
                     <SettingsBtn />
