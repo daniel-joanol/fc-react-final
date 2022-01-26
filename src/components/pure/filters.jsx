@@ -37,7 +37,7 @@ const Filters = ({getCandidatesFilter}) => {
         if (local !== null){
             filter = filter + 'local=' + local + '&';
         }
-        
+
         if (tags.length !== 0){
             filter = filter + 'tags='
             tags.map((tag, index) => {
@@ -75,8 +75,8 @@ const Filters = ({getCandidatesFilter}) => {
                             setTags(tags => [...tags, filter])
                         }
                     })
+
                 }
-                
             }
         }
 
