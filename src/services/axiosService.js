@@ -86,21 +86,18 @@ export const createCandidate = (student, token) => {
 
 }
 
-export const addPhoto = (file, token) => {
+export const addPhoto = (id, formData, token) => {
 
     const headers = {
         'Content-Type' : 'multipart/form-data ;; charset=utf-8; boundary="----arbitrary boundary"',
         'Authorization': `Bearer ${token}`
     }
 
-    const formData = new FormData()
-        formData.append('photo', file)
-
     const body = {
-        formData
+        image:  formData
     }
 
-    return axios.post('http://localhost:8080/api/candidates/photo', body, { headers: headers })
+    return axios.post('http://localhost:8080/api/candidates/photo/' + id, body, { headers: headers })
 }
 
 export const addPdf = (id, file, token) => {
